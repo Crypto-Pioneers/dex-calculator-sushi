@@ -27,19 +27,21 @@ contract BaseTest is Test {
     }
 
     function test_getPriceFromPoolTokens() public view {
-        (uint256 wethPerUSDC, uint256 usdcPerWETH, ,) = calculator.getPriceFromPoolTokens(WETH, USDC);
+        address pair = calculator.getPair(USDC, WETH);
+        (uint256 wethPerUSDC, uint256 usdcPerWETH, ,) = calculator.getPriceFromPoolTokens(pair);
         console.log(wethPerUSDC);
         console.log(usdcPerWETH);
     }
 
     function test_getAvaliableTokenAmountFromPriceRange() public view {
+        address pair = calculator.getPair(USDC, WETH);
         (
             uint256 reserveA,
             uint256 reserveFrom,
             uint256 reserveTo,
             uint256 decimals,
             ,
-        ) = calculator.getAvaliableTokenAmountFromPriceRange(WETH, USDC, 3000 * 10 ** 11, 3300 * 10 ** 11);
+        ) = calculator.getAvaliableTokenAmountFromPriceRange(pair, 3000 * 10 ** 11, 3300 * 10 ** 11, 0);
 
         console.log(reserveA);
         console.log(reserveFrom);
