@@ -52,8 +52,8 @@ contract SushiCalculator {
         // get the amount of reserves for both of tokens
         (uint256 reserveA, uint256 reserveB, ) = IUniswapV2Pair(pair).getReserves();
 
-        tokenAInTokenB = reserveB * (10 ** decimalsA) / (reserveA * (10 ** decimalsB)) * denominator;
-        tokenBInTokenA = reserveA * (10 ** decimalsB) / (reserveB * (10 ** decimalsA)) * denominator;
+        tokenAInTokenB = reserveB * (10 ** decimalsA) / reserveA * denominator / (10 ** decimalsB);
+        tokenBInTokenA = reserveA * (10 ** decimalsB) / reserveB * denominator / (10 ** decimalsA);
     }
 
     function getAvaliableTokenAmountFromPriceRange(
