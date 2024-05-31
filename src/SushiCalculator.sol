@@ -15,18 +15,17 @@ contract SushiCalculator {
         uint256 reserveB,
         uint256 decimalsA,
         uint256 decimalsB,
-        string memory symbol0,
-        string memory symbol1
+        string memory symbolA,
+        string memory symbolB
     ) {
         require(pair != address(0), "The pair doesn't exist");
 
         address tokenA = IUniswapV2Pair(pair).token0();
         address tokenB = IUniswapV2Pair(pair).token1();
-
         decimalsA = IERC20(tokenA).decimals();
         decimalsB = IERC20(tokenB).decimals();
-        symbol0 = IERC20(tokenA).symbol();
-        symbol1 = IERC20(tokenB).symbol();
+        symbolA = IERC20(tokenA).symbol();
+        symbolB = IERC20(tokenB).symbol();
 
         (reserveA, reserveB, ) = IUniswapV2Pair(pair).getReserves();
     }
